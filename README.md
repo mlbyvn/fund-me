@@ -1,66 +1,61 @@
-## Foundry
+# FundMe
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Project purpose is to get acquainted with foundry, Chainlink price feeds, deploying to SepoliaETH testnet (or to the mainnet), some code optimization and testing. It is a part of a Cyfrin Updraft course, which [could be found here](https://updraft.cyfrin.io/courses/foundry).
 
-Foundry consists of:
+## Description
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Functionality: 
+* FundMe.sol:
+    * function fund(): allows to fund the contract with some ETH (more than minimum allowed amount MINIMUM_USD). A funder is added to the list of all funders. 
+    * function getVersion(): returns the price feed version.
+    * function withdraw(): allows the contract owner to withdraw funds. 
+    * getter functions.
+* PriceConverter.sol:
+    * function getPrice(AggregatorV3Interface priceFeed): returns ETH/USD rate for Sepolia testnet in 18 digit.
+    * function function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed): returns the actual SepoliaETH/USD conversion rate.
 
-## Documentation
+## Getting Started
 
-https://book.getfoundry.sh/
+### Dependencies
 
-## Usage
+* [foundry](https://github.com/foundry-rs) 
+* Sepolia node on [Alchemy](https://dashboard.alchemy.com/)
+* [Etherscan](https://etherscan.io/) api (optional)
 
-### Build
+### Installing
 
-```shell
-$ forge build
+* How/where to download your program
+* Add an .env file, in order to be able to deploy on sepolia using makefile
+    * SEPOLIA_RPC_URL: sepolia rpc url (possibly node on Alchemy)
+    * MAINNET_RPC_URL: mainnet rpc url
+    * ETHERSCAN_API_KEY: etherscan api key
+    * ACCOUNT_NAME: pre-setup account (cast wallet import)
+    * SENDER: address of ACCOUNT_NAME
+
+### Executing program
+
+* Build:
+```
+make build
+```
+* Tests on anvil:
+```
+forge test
+```
+* Tests on sepolia:
+```
+forge test --fork-url $SEPOLIA_RPC_URL
+```
+* Deploy on sepolia:
+```
+make deploy-sepolia
 ```
 
-### Test
+## Authors
 
-```shell
-$ forge test
-```
+Aleksandr Rybin  
 
-### Format
+## Version History
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+* 0.1
+    * Initial Release
