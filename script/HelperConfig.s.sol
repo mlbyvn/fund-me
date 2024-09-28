@@ -1,42 +1,57 @@
 // SPDX-License-Identifier: MIT
 
-// 1. Deploy mocks when we are on a local anvil chain
-// 2. Keep track of contract address across different chains
-
 pragma solidity ^0.8.19;
 
 import {Script} from "forge-std/Script.sol";
 import {MockV3Aggregator} from "../test/mocks/MockV3Aggregator.sol";
 
+/**
+ * @notice Contract does 2 things:
+ * 1. Deploy mocks when we are on a local anvil chain
+ * 2. Keep track of contract address across different chains
+ */
+
 contract HelperConfig is Script {
-    // If we are on a local net, we deploy mocks
-    // Otherwise, grab the existing address from the live network
+    /**
+     * @notice If we are on a local net, we deploy mock aggregator interface
+     * to get the conversion rate from it; Otherwise, grab the existing address
+     *  from the live network.
+     */
 
     NetworkConfig public activeNetworkConfig;
     uint8 public constant DECIMALS = 8;
     int256 public constant INITIAL_PRICE = 2000e8;
+    uint256 public constant SEPOLIA_CHAIN_ID = 11155111;
+    uint256 public constant MAINNET_CHAIN_ID = 1;
 
     struct NetworkConfig {
         address priceFeed; // ETH/USD price feed address
     }
 
     constructor() {
-        if (block.chainid == 11155111) {
+        if (block.chainid == SEPOLIA_CHAIN_ID) {
             activeNetworkConfig = getSepoliaEthConfig();
-        } else if (block.chainid == 1) {
+        } else if (block.chainid == MAINNET_CHAIN_ID) {
             activeNetworkConfig = getMainnetEthConfig();
         } else {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
     }
 
+    /**
+     * @dev Returns the address of price feed on sepolia.
+     */
+
     function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
-        //price feed address
         NetworkConfig memory sepoliaConfig = NetworkConfig({
             priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306
         });
         return sepoliaConfig;
     }
+
+    /**
+     * @dev Returns the address of price feed on mainnet
+     */
 
     function getMainnetEthConfig() public pure returns (NetworkConfig memory) {
         NetworkConfig memory ethConfig = NetworkConfig({
@@ -45,9 +60,12 @@ contract HelperConfig is Script {
         return ethConfig;
     }
 
-    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
-        //price feed address
+    /**
+     * @dev If the mock aggregator interface is deployed, return its address on anvil,
+     * otherwise deploy one.
+     */
 
+    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
         // 1. Deploy the mocks
         // 2. Return the mock addresses
 

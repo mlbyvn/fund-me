@@ -5,6 +5,10 @@ import {Script, console} from "forge-std/Script.sol";
 import {FundMe} from "../../src/FundMe.sol";
 import {DevOpsTools} from "foundry-devops/src/DevOpsTools.sol";
 
+/**
+ * @dev Integration test that run on most recently deployed FundMe contract
+ */
+
 contract FundFundMe is Script {
     uint256 SEND_VALUE = 0.1 ether;
 

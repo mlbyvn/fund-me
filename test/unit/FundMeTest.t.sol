@@ -6,6 +6,10 @@ import {Test, console} from "forge-std/Test.sol";
 import {FundMe} from "../../src/FundMe.sol";
 import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 
+/**
+ * @dev Some unit tests.
+ */
+
 contract FundMeTest is Test {
     address USER = makeAddr("user"); // fake address for tests
     uint256 constant SEND_VALUE = 0.1 ether;

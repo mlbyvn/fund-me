@@ -6,13 +6,15 @@ import {Script} from "forge-std/Script.sol";
 import {FundMe} from "../src/FundMe.sol";
 import {HelperConfig} from "../script/HelperConfig.s.sol";
 
+/**
+ * @notice Deploys FundMe contract to the network from HelperConfig
+ */
+
 contract DeployFundMe is Script {
     function run() external returns (FundMe) {
-        // Before startBroadcast -> Not a "real" tx
         HelperConfig helperConfig = new HelperConfig();
         address ethUsdPriceFeed = helperConfig.activeNetworkConfig();
 
-        // After startBroadcast -> Real tx!
         vm.startBroadcast();
         FundMe fundMe = new FundMe(ethUsdPriceFeed);
         vm.stopBroadcast();
