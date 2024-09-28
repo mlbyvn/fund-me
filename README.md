@@ -57,5 +57,9 @@ Aleksandr Rybin
 
 ## Version History
 
-* 0.1
+* 1.0
     * Initial Release
+* 1.1
+    * Some contract refactoring to make it more gas efficient.
+    * Comments added.
+    * Updated makefile.
