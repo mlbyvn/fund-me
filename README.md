@@ -1,6 +1,6 @@
 # FundMe
 
-Project purpose is to get acquainted with foundry, Chainlink price feeds, deploying to SepoliaETH testnet (or to the mainnet), some code optimization and testing. It is a part of a Cyfrin Updraft course, which [could be found here](https://updraft.cyfrin.io/courses/foundry).
+Project purpose is to get acquainted with foundry, Chainlink price feeds, deploying to SepoliaETH testnet (or to the mainnet), some code optimization and testing. It is a part of a Cyfrin Updraft course, which [could be found here](https://updraft.cyfrin.io/courses/foundry). The contract is published and verified at 0x6f35b7E43c2DeBfe34D74fA08b18B9EBcd973Ac8.
 
 ## Description
 
