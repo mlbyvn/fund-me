@@ -12,7 +12,7 @@ Functionality:
     * getter functions.
 * PriceConverter.sol:
     * function getPrice(AggregatorV3Interface priceFeed): returns ETH/USD rate for Sepolia testnet in 18 digit.
-    * function function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed): returns the actual SepoliaETH/USD conversion rate.
+    * function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed): returns the actual SepoliaETH/USD conversion rate.
 
 ## Getting Started
 
@@ -24,7 +24,6 @@ Functionality:
 
 ### Installing
 
-* How/where to download your program
 * Add an .env file, in order to be able to deploy on sepolia using makefile
     * SEPOLIA_RPC_URL: sepolia rpc url (possibly node on Alchemy)
     * MAINNET_RPC_URL: mainnet rpc url
